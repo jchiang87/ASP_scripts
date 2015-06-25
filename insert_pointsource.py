@@ -78,6 +78,93 @@ def add_drp_source(srcname, ra, dec, srctype, aspnames, day, week, debug=True):
         expose_lightcurves(item, day, week, debug)
     
 if __name__ == '__main__':
+    add_drp_source('PKS 0903-57', 136.2215792, -57.5849397, 'Blazar',
+                   ('ASPJ090409-574111',), 2554, 366, debug=False)
+
+#    add_drp_source('ON 246', 187.5587054, 25.3019822, 'Blazar',
+#                   ('ASPJ122908+251127',), 2536, 363, debug=False)
+#
+#    add_drp_source('PKS 2032+107', 308.8430554, 10.9352192, 'Blazar',
+#                   ('ASPJ203523+110815',), 2497, 357, debug=False)
+#
+#    add_drp_source('3C 120', 68.2962313, 5.3543389, 'Blazar',
+#                   ('ASPJ043144+050410',), 2283, 327, debug=False)
+#
+#    add_drp_source('PKS B2258-022', 345.2832433, -1.9679403, 'Blazar',
+#                   ('ASPJ230219-022137',), 2493, 357, debug=False)
+#
+#    add_drp_source('PKS 0130-17', 23.1811975, -16.9134783, 'Blazar',
+#                   ('ASPJ013231-165023',), 2483, 355, debug=False)
+#
+#    add_drp_source('TXS 2241+406', 341.0530463, 40.9537836, 'Blazar',
+#                   ('ASPJ224406+410733',), 2433, 348, debug=False)
+#
+#    add_drp_source('B2 1504+37', 226.5397079, 37.5142033, 'Blazar',
+#                   ('ASPJ150422+372727',), 2345, 336, debug=False)
+#
+#    add_drp_source('PKS 0736+01', 114.8251408, 1.6179497, 'Blazar',
+#                   ('ASPJ073929+014347',), 2340, 335, debug=False)
+#
+#    add_drp_source('S4 0954+65', 149.6968546, 65.5652272, 'Blazar',
+#                   ('BM_S40954p65',), 2335, 334, debug=False)
+#
+#    add_drp_source('PKS 1824-582', 277.3016763, -58.2319892, 'Blazar',
+#                   ('ASPJ182858-581022',), 2117, 303, debug=False)
+#
+#    add_drp_source('PKS B1908-201', 287.7902200, -20.1153078, 'Blazar',
+#                   ('ASPJ191117-201949',), 2301, 329, debug=False)
+#
+#    add_drp_source('PKS 0336-01', 54.8789071, -1.7766119, 'Blazar',
+#                   ('BM_PKS0336m01',), 2300, 329, debug=False)
+#
+#    add_drp_source('Fermi J2007-2518', 302.371, -25.411, 'Blazar',
+#                   ('ASPJ200831-260239',), 2288, 328, debug=False)
+#
+#    add_drp_source('PKS 0502+049', 76.3466029, 4.9952014, 'Blazar',
+#                   ('ASPJ050626+045814', ), 2250, 322, debug=False)
+#
+#    add_drp_source('OP 313', 197.6194325, 32.3454953, 'Blazar',
+#                   ('ASPJ130853+323648',), 2118, 303, debug=False)
+#
+#    add_drp_source('B2 1144+40', 176.7429079, 39.9761956, 'Blazar',
+#                   ('ASPJ114704+395823',), 2080, 298, debug=False)
+#    
+#    add_drp_source('4C +01.28', 164.6233550, 1.5663400, 'Blazar',
+#                   ('ASPJ105835+011335',), 2065, 296, debug=False)
+#
+#    add_drp_source('4C +50.11', 59.8739467, 50.9639336, 'Blazar',
+#                   ('ASPJ040117+501710',), 2045, 293, debug=False)
+#                   
+#    add_drp_source('S5 1044+71', 162.1150829, 71.7266494, 'Blazar',
+#                   ('ASPJ104816+713958',), 2033, 291, debug=False)
+#                   
+#    add_drp_source('PKS 2136-642', 325.003500, -64.026389, 'Blazar',
+#                   ('ASPJ213832-641920',), 2008, 287, debug=False)
+#
+#    add_drp_source('1ES 2322-409', 351.186125, -40.680361, 'Blazar',
+#                   ('ASPJ232100-401500',), 1931, 277, debug=False)
+#    
+#    add_drp_source('VER 0521+211', 80.4415242, 21.2142919, 'Blazar',
+#                   ('ASPJ052148+211658',), 1938, 278, debug=False)
+#
+#    add_drp_source('4C +01.02', 17.1615458, 1.5834214, 'Blazar',
+#                   ('ASPJ010700+021500',), 1908, 273, debug=False)
+#    
+#    add_drp_source('1H 0323+342', 51.1715054, 34.1794044, 'Blazar',
+#                   ('ASPJ032529+335254',), 1891, 271, debug=False)
+#    
+#    add_drp_source('PKS 0920-39', 140.6934092, -39.9930739, 'Blazar',
+#                   ('ASPJ092132-395302',), 1886, 270, debug=False)
+#    
+#    add_drp_source('PMN J0017-0512', 4.3992383, -5.2116019, 'Blazar',
+#                   ('ASPJ001750-051806',), 1796, 257, debug=False)
+#
+#    add_drp_source('PKS 2320-035', 350.8831404, -3.2847286, 'Blazar',
+#                   ('ASPJ232327-033931',), 1766, 253, debug=False)
+#    
+#    add_drp_source('PKS 0507+17', 77.5098713, 18.0115506, 'Blazar',
+#                   ('ASPJ050833+173640',), 1762, 252, debug=False)
+#    
 #    add_drp_source('NGC 1275', 49.9506671, 41.5116961, 'Blazar',
 #                   ('ASPJ031821+413814',), 1671, 239, debug=False)
 #    
