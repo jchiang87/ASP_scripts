@@ -1,0 +1,104 @@
+ssh rhel6-64
+cd /afs/slac/g/glast/ground/ASP/prod
+cvs co -r ASP-vv-rr-pp ASP-scons
+mv ASP-scons ASP-vv-rr-pp
+
+# Edit pyASP/python/databaseAccess.py to enable asp_prod:
+
+#
+# Set the default to point to the dev tables.
+#
+asp_default = asp_prod
+
+#try:
+#    #
+#    # Reset the default to prod if running in the PROD pipeline.
+#    #
+#    if os.environ['PIPELINESERVER'] == "PROD":
+#        asp_default = asp_prod
+#except KeyError:
+#    #
+#    # We may be running interactively (and did not set PIPELINESERVER), 
+#    # so keep "DEV" as the default.
+#    #
+#    print "Warning: Using dev db tables."
+#    pass
+
+pushd ST
+
+# Edit the Makefile entry for ASP_prod to point to ASP-vv-rr-pp.  This
+# is required because SCons writes the explicit path to the
+# asp_[pre,post]setup.sh files in the wrapper scripts.
+
+make ASP_prod
+popd
+
+#
+# Edit the .sh scripts below to set since `dirname $0` doesn't work.
+#
+
+export INST_DIR=/afs/slac/g/glast/ground/ASP/prod/ASP-vv-rr-pp
+
+#
+# Move symlink to ASP
+#
+
+ln -s ASP-vv-rr-pp ASP
+
+#
+# Ensure the location of aspLauncher.sh is correct:
+#
+cd /afs/slac/g/glast/ground/links/data/ASP
+ln -sf /afs/slac/g/glast/ground/ASP/prod/ASP/bin/redhat6-x86_64-64bit-gcc44-Optimized/aspLauncher.sh
+
+#
+# Ensure the location of ingestNoticeQueue_rh6-64.sh is correct:
+#
+cd /afs/slac/g/glast/ground/ASP/GCN_Archive/
+ln -sf /afs/slac/g/glast/ground/ASP/prod/ASP/bin/redhat6-x86_64-64bit-gcc44-Optimized/ingestNoticeQueue.sh ingestNoticeQueue_rh6-64.sh
+
+#
+# Check that notices are being properly ingested by cron job at 5 min
+# intervals.
+# (See https://confluence.slac.stanford.edu/display/~chee/Fermi+Cronjob
+# for cronjob locations.)
+#
+ssh fermilnx-v05
+cd /scratch/ASP
+ll
+
+#
+# Ensure the location of make_monitored_source_list.sh is correct:
+# (currently called by makeDrpLcTables.sh on rhel6-64 via trscrontab)
+#
+cd /afs/slac/g/glast/ground/links/data/ASP
+ln -sf /afs/slac/g/glast/ground/ASP/prod/ASP/bin/redhat6-x86_64-64bit-gcc44-Optimized/make_monitored_source_list.sh
+
+#
+# Edit make_monitored_source_list.sh to define DRPMONITORINGROOT env var:
+#
+export DRPMONITORINGROOT=/afs/slac/g/glast/ground/ASP/prod/ASP-vv-rr-pp/drpMonitoring
+
+#
+# Copy the GCN_Notice_processor.py script for the procmail GCN ingest process
+#
+
+cd /afs/slac/g/glast/ground/PipelineConfig/ASP/bin 
+cp /afs/slac/g/glast/ground/ASP/prod/ASP/grbASP/python/GCN/GCN_Notice_processor.py .
+
+#
+# Install any new xml task defs
+#
+aspLauncher/xml/AspInsertIntervals.xml
+aspLauncher/xml/AspLauncher.xml
+asp_pgwave/xml/PGWAVE.xml
+drpMonitoring/xml/DRP_monitoring.xml
+grbASP/xml/GRB_afterglow.xml
+grbASP/xml/GRB_afterglow_launcher.xml
+grbASP/xml/GRB_blind_search.xml
+grbASP/xml/GRB_refinement.xml
+grbASP/xml/GRB_refinement_launcher.xml
+
+# update configs in db tables
+GRB_ASP_CONFIG   STARTDATE=456833103 456845884   ENDDATE=618796803  IRFS=P8R2_TRANSIENT020_V6   THRESHOLD=319
+SOURCEMONITORINGCONFIG  STARTDATE=456840000  ENDDATE=618796803  IRFS=P8R2_SOURCE_V6  ST_VERSION=10-01-01 ASP_VERSION=07-00-00 FT1_FILTER='(EVENT_CLASS & o200) != o0'
